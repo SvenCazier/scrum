@@ -1,0 +1,40 @@
+{
+  "name": "scrum-php202404/webshop",
+  "description": "Scrum project Arpil 2024 - Prularia Webshop",
+  "type": "project",
+  "autoload": {
+    "psr-4": {
+      "Webshop\\": "src/",
+      "Tests\\": "tests/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Gautier Depoorter",
+      "email": "gautier.depoorter@vdabcampus.be"
+    },
+    {
+      "name": "Marijke Van Mol",
+      "email": "marijke.vanmol@vdabcampus.be"
+    },
+    {
+      "name": "Michiel Van Isacker",
+      "email": "michiel.vanisacker@vdabcampus.be"
+    },
+    {
+      "name": "Noah Van Brabant",
+      "email": "noah.vanbrabant@vdabcampus.be"
+    },
+    {
+      "name": "Sven Cazier",
+      "email": "sven.cazier@vdabcampus.be"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require-dev": {
+    "phpunit/phpunit": "^11.1"
+  },
+  "require": {
+    "twig/twig": "^3.8"
+  }
+}
