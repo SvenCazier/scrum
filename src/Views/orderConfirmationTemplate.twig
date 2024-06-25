@@ -1,0 +1,100 @@
+{% extends "baseTemplate.twig" %}
+
+{% block content %}
+	{% if guestUser %}
+
+		<section class="bestelling-bevestiging-block">
+			<form class="" method="post" action="{{ basePath() }}/registerpassword">
+				<table>
+					<thead>
+						<tr>
+							<th colspan="4">
+								<h2>Wil je toch nog een account aanmaken?</h2>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td colspan="4">
+								<p>Het aanmaken van een account maakt het bestellen de volgende keer veel eenvoudiger.<br>
+									Je hoeft enkel nog een wachtwoord in te vullen.</p>
+							</td>
+						</tr>
+						<tr>
+							<article class="form-control">
+								<td>
+									<label for="register_password">Wachtwoord:</label>
+								</td>
+								<td><input type="password" id="register_password" name="register_password" value="{{ registrationData.register_password }}"></td>
+							</article>
+						</tr>
+						<tr>
+							<article class="form-control">
+								<td>
+									<label for="confirmation_password">Bevestig wachtwoord:</label>
+								</td>
+								<td><input type="password" id="confirmation_password" name="confirmation_password" value="{{ registrationData.confirmation_password }}"></td>
+							</article>
+						</tr>
+						<tr>
+							<td colspan="4">
+								{% if errors.register_password %}
+									<p class="error">
+										<i class="bi bi-exclamation-triangle"></i>
+										{{ errors.register_password }}</p>
+								{% endif %}
+								{% if errors.confirmation_password %}
+									<p class="error">
+										<i class="bi bi-exclamation-triangle"></i>
+										{{ errors.confirmation_password }}</p>
+								{% endif %}
+								{% if errors.passwords_not_equal %}
+									<p class="error">
+										<i class="bi bi-exclamation-triangle"></i>
+										{{ errors.passwords_not_equal }}</p>
+								{% endif %}
+							</td>
+						</tr>
+						<tr>
+							<td colspan="4">
+								<article class="form-control center-btn">
+									<button type="submit">Account aanmaken</button>
+								</article>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+		</section>
+	{% endif %}
+	{# if there's a password error it means the page refreshed and all the order data is gone now, don't show this again #}
+	{# But I can't get it to work #}
+	<div class="bestelling-bevestiging-wrapper ">
+		<section class="bestelling-bevestiging-rechts shadow">
+			<h2 class="bestelling-bevestiging-h2">Bedankt voor uw bestelling!</h2>
+			<img src="{{ basePath()}}/public/assets/img/bevestiging-bestelling.png" alt="Description of the image" width="100%" class="bestelling-head-img">
+			<p class="bestelling-bevestiging-p">U kan ze eerstdaags aan uw deur verwachten!</p>
+			<p>Verder kan u alvast uw bestelling bekijken.
+			</p>
+		</section>
+		<section class="shadow">
+			<table id="cart-table">
+				<thead>
+					<tr class="upperCase">
+						<th>FOTO</th>
+						<th>ARTIKEL</th>
+						<th>AANTAL</th>
+						<th class="bestelling-bevestiging-align-right">PRIJS</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+
+			<p class="totalPrice">
+				<span class="totalPrice-totaal upperCase">
+					<b>Totaal:</b>
+				</span>
+				<span class="totalPrice-prijs" id="total-price">0</span>
+			</p>
+		</section>
+	{% endblock %}

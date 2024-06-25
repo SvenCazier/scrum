@@ -1,0 +1,102 @@
+{% extends "baseTemplate.twig" %}
+{% block content %}
+
+	<div class="container productDetailContainer">
+
+		<section class="productImg_section productSection">
+			<img src="{{ basePath()}}/public/assets/img/artikel-{{product.id}}.jpg">
+		</section>
+
+		<section class="productData_section productSection">
+			<h1>{{product.naam}}</h1>
+			<h4>EAN</h4>
+			<p>
+				{{product.EAN}}</p>
+			<h4>Beschrijving</h4>
+			<p>{{product.Beschrijving}}</p>
+			<h4>Gewicht in gram</h4>
+			<p>{{product.GewichtInGram}}</p>
+
+			<h3 class="productDetail_prijs">{{product.prijs}},-</h3>
+			<h1></h1>
+
+			<h4>Aantal</h4>
+			<div class="amount_buttons">
+				<button id="minusButton">-</button>
+				<input class="amount_input" type="number" id="amountInput" value="1" min="1" max="{{product.voorraad}}">
+				<button id="plusButton">+</button>
+			</div>
+
+			<button data-product-id="{{product.id}}" data-product-quantity="1" data-product-quantity="1" id="addCardProductToCart" class="addCardProductToCart product-winkelmandje-btn">+
+
+
+				<i class="bi bi-cart"></i>
+			</button>
+
+		</section>
+	</div>
+	<script>
+		const PRODUCT_STOCK = {{ product.voorraad }};
+let intervalId;
+const addToCartBtn = document.getElementById("addCardProductToCart");
+const amountInput = document.getElementById("amountInput");
+const plusBtn = document.getElementById("plusButton");
+const minusBtn = document.getElementById("minusButton");
+
+amountInput.addEventListener("blur", () => changeAmount(null));
+amountInput.addEventListener("keyup", (event) => changeAmount(event));
+
+plusBtn.addEventListener("mousedown", () => {
+add();
+intervalId = setInterval(() => {
+add();
+}, 250);
+window.addEventListener("mouseup", mUpHandler);
+});
+
+minusBtn.addEventListener("mousedown", () => {
+subtract();
+intervalId = setInterval(() => {
+subtract();
+}, 250);
+window.addEventListener("mouseup", mUpHandler);
+});
+
+function mUpHandler() {
+clearInterval(intervalId);
+window.removeEventListener("mouseup", mUpHandler);
+}
+
+function changeAmount(event = null) {
+if (event === null || event.key === "Enter") {
+let newValue = parseInt(amountInput.value)
+
+if (isNaN(newValue) || newValue < 1) {
+newValue = 1;
+} else if (newValue > PRODUCT_STOCK) {
+newValue = PRODUCT_STOCK;
+}
+
+addToCartBtn.dataset.productQuantity = amountInput.value = newValue;
+
+amountInput.blur();
+}
+}
+
+function add() {
+const newValue = parseInt(amountInput.value) + 1;
+if (newValue <= PRODUCT_STOCK) {
+addToCartBtn.dataset.productQuantity = amountInput.value = newValue;
+}
+}
+
+function subtract() {
+const newValue = parseInt(amountInput.value) - 1;
+if (newValue > 0) {
+addToCartBtn.dataset.productQuantity = amountInput.value = newValue;
+}
+}
+	</script>
+
+
+{% endblock %}

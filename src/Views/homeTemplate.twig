@@ -1,0 +1,69 @@
+{% extends "baseTemplate.twig" %}
+{% block content %}
+	<!-- CONTENT HERE -->
+
+	<!-- main content container -->
+		<div class="container home_container"> 
+
+			<!-- showcase ons assortiment -->
+			<section class="section">
+				<div class="assortiment_div">
+					<h1 class="center">
+						Ons assortiment
+					</h1>
+					<div class="img_container">
+					<div class="img_card">
+						<a href="{{ basePath() }}/category?categorieId=30">
+							
+								<img class="category_img" src="./public/assets/img/categorie-30.jpg" width="200px"/>
+								<h4>Wonen</h4>
+							</a>
+							</div>
+						
+						<div class="img_card">
+						<a href="{{ basePath() }}/category?categorieId=1">
+							
+								<img class="category_img" src="./public/assets/img/categorie-1.jpg" width="200px"/>
+								<h4>Huishouden</h4>
+							</a>
+							</div>
+						
+						<div class="img_card">
+						<a href="{{ basePath() }}/category?categorieId=20">
+							
+								<img class="category_img" src="./public/assets/img/categorie-20.jpg" width="200px"/>
+								<h4>Klussen</h4>
+								</a>
+							</div>
+						
+					</div>
+				</div>
+			</section>
+
+			<!-- knop belijk alle categorieen -->
+			<section class="button_section section"> 
+				<a class="category_button button" href="{{ basePath() }}/category">
+					<h3>Bekijk alle categorieën</h3>
+					<i class="bi bi-chevron-right"></i>
+				</a>
+			</section>
+
+			<!-- Carousel -->
+			{# <section class="section">
+				<h3>Assortiment in de kijker</h3>
+				<div class="carousel_wrapper">
+					<i class="bi bi-chevron-left"></i>
+					<div class="carousel">
+						<img src="./public/assets/img/categorie-.jpg" alt="">
+						<img src="./public/assets/img/categorie-30.jpg" alt="">
+						<img src="./public/assets/img/categorie-1.jpg" alt="">
+						<img src="./public/assets/img/categorie-20.jpg" alt="">
+						<img src="./public/assets/img/categorie-30.jpg" alt="">
+						<img src="./public/assets/img/categorie-10.jpg" alt="">
+					</div>
+					<i class="bi bi-chevron-right"></i>
+				</div>
+			</section> #}
+	</div>
+	<!-- End of container  -->
+{% endblock %}

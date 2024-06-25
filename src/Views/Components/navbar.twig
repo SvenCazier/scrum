@@ -1,0 +1,83 @@
+<nav class="navbar">
+	<section class="logo_hamburger_section">
+		<div class="logo">
+			<a href="{{ basePath() }}/">
+				<img src="{{ basePath() }}/public/assets/img/logo_prularia_zwart-no-bg.png"/>
+			</a>
+		</div>
+		<div class="hamburger">
+			<div class="bar"></div>
+			<div class="bar"></div>
+			<div class="bar"></div>
+		</div>
+	</section>
+	<div class="search_container">
+		<i class="bi bi-search"></i>
+		<input type="text" placeholder="Zoeken..." id="search_input" class="search_bar">
+		<button type="submit" id="search_button_nav" class="search_button">Zoeken</button>
+	</div>
+
+
+	<div class="nav_menu">
+		{% if authenticatedUser is null %}
+
+			<div class="nav_item">
+				<a href="{{ basePath() }}/login" class="nav_link">
+					<i class="bi bi-person nav_icon"></i>
+					<span class="nav_link-text">Aanmelden</span>
+				</a>
+			</div>
+
+		{% else %}
+			<div class="nav_item dropdown">
+				<span class="nav_link dropdown-title" id="navbarDropdown" role="button" aria-haspopup="true" tabindex="0">
+					<i class="bi bi-person"></i>
+					<span id="klant_naam" class="nav_link-text">
+						{{ authenticatedUser.voornaam }}
+						{{ authenticatedUser.familienaam }}
+					</span>
+				</span>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<div class="nav_item">
+						<a href="{{ basePath() }}/profile" class="nav_link">Mijn profiel</a>
+					</div>
+					<div class="nav_item">
+						<form action="{{ basePath() }}/logout" method="post" class="logout-form">
+							<button type="submit" class="nav_link">Afmelden</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		{% endif %}
+
+		<div id="cart-link" class="nav_item cart-link">
+			<a href="{{ basePath() }}/checkout" class="nav_link">
+				<i
+					class="bi bi-cart">
+					<!-- hoeveelheid icon -->
+					<span id="cartBadge" class="cart-badge"></span>
+
+				</i>
+				<span class="nav_link-text">
+					Winkelmandje
+				</span>
+			</a>
+		</div>
+
+	</div>
+
+
+</nav>
+<nav class="second_navbar">
+	<ul>
+		<li>
+			<a href="{{ basePath() }}/category">Assortiment
+				<li>
+					<a href="#">Promoties</a>
+				</li>
+				<li>
+					<a href="#">Hulp &amp; advies</a>
+				</li>
+			</ul>
+		</li>
+	</nav>

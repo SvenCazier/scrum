@@ -1,0 +1,83 @@
+{% extends "baseTemplate.twig" %}
+{% block content %}
+	<section class="text-page">
+		<h1>Dataopslag en -beheerpraktijken</h1>
+		<article>
+			<h3>Gebruikersverificatie: PHP-sessie</h3>
+			<p>
+				<strong>Doel:</strong>
+				De PHP-sessie wordt gebruikt voor gebruikersverificatie en het behouden van gebruikerssessies tijdens hun navigatie op de website.</p>
+			<br>
+			<p>
+			
+				<strong>Dataopslag:</strong>
+				De PHP-sessie slaat tijdelijk informatie op over de huidige gebruikerssessie, inclusief gebruikers-ID, gebruikersnaam en eventuele sessievariabelen die nodig zijn voor het verifiëren van de gebruiker en het handhaven van de sessie.</p>
+			<br>
+			<p>
+				<strong>Gegevensbewaring:</strong>
+				Sessiegegevens worden alleen bewaard gedurende de duur van de gebruikerssessie en worden automatisch verwijderd wanneer de sessie verloopt of de gebruiker uitlogt.</p>
+		</article>
+
+		<article>
+			<h3>Winkelwagenbeheer: Lokale opslag</h3>
+			<p>
+				<strong>Doel:</strong>
+				Lokale opslag wordt gebruikt om de status van de winkelwagen bij te houden over verschillende pagina's en gebruikerssessies.</p>
+			<br>
+			<p>
+				<strong>Dataopslag:</strong>
+				De inhoud van de winkelwagen, inclusief product-ID's en hoeveelheden, wordt opgeslagen in de lokale opslag van de browser van de gebruiker.</p>
+			<br>
+			<p>
+				<strong>Gegevensbewaring:</strong>
+				De gegevens in de winkelwagen worden permanent opgeslagen in de lokale opslag van de browser, tenzij de gebruiker handmatig zijn winkelwagen leegt of de gegevens worden gewist door de websitebeheerder.</p>
+		</article>
+
+		<article>
+			<h3>Cookievoorkeuren: Browsercookies</h3>
+			<p>
+				<strong>Doel:</strong>
+				Cookies worden gebruikt om gebruikersvoorkeuren met betrekking tot cookie-toestemming te onthouden en om een gepersonaliseerde browse-ervaring te bieden.</p>
+			<br>
+			<p>
+				<strong>Dataopslag:</strong>
+				Cookies slaan informatie op zoals gebruikersvoorkeuren, taalinstellingen en sessie-identificatoren om de gebruikerservaring te verbeteren.</p>
+			<br>
+			<p>
+				<strong>Gegevensbewaring:</strong>
+				Cookies kunnen langdurig worden bewaard op het apparaat van de gebruiker, afhankelijk van de instellingen van de cookie en de browservoorkeuren van de gebruiker.</p>
+		</article>
+
+		<article>
+			<h3>Gegevensbeveiliging</h3>
+			<p>
+				<strong>Versleuteling:</strong>
+				Alle gevoelige gegevens, inclusief gebruikersverificatietokens en winkelwageninformatie, worden versleuteld met industrienorm versleutelingsalgoritmen om te beschermen tegen ongeautoriseerde toegang.</p>
+			<br>
+			<p>
+				<strong>Beveiligingsmaatregelen:</strong>
+				De website implementeert beveiligingsmaatregelen zoals HTTPS-verbindingen, firewalls en regelmatige beveiligingsaudits om de veiligheid van gebruikersgegevens te waarborgen.</p>
+		</article>
+
+		<article>
+			<h3>Compliance</h3>
+			<p>
+				<strong>Privacybeleid:</strong>
+				Er wordt een uitgebreid privacybeleid verstrekt op de website, waarin de gegevensverzameling, -opslag en -gebruikspraktijken worden beschreven in overeenstemming met de geldende privacywetten en -voorschriften.</p>
+			<br>
+			<p>
+				<strong>Cookiebeleid:</strong>
+				Een duidelijk cookiebeleid wordt gepresenteerd aan gebruikers, inclusief informatie over het gebruik van cookies, cookievoorkeuren en hoe gebruikers cookies kunnen beheren.</p>
+		</article>
+
+		<article>
+			<h3>Contactgegevens</h3>
+			<p>Voor vragen of opmerkingen over onze dataopslag- en beheerpraktijken kunt u contact met ons opnemen via het volgende adres:</p>
+			<p>Prularia</p>
+			<p>Adres: Lange Nieuwstraat 10, 2000 Antwerpen</p>
+			<p>Email: info@prularia.be</p>
+			<p>Telefoon: +32 3 123 45 67</p>
+		</article>
+	</section>
+
+{% endblock %}

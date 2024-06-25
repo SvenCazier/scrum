@@ -1,0 +1,73 @@
+{% extends "baseTemplate.twig" %}
+{% block content %}
+
+
+	<div class="maincategory_container">
+		<aside class="category_aside">
+			<h2>
+				<a href="{{ basePath() }}/category">categorieën</a>
+			</h2>
+
+			<ul class="category_mainlist">
+				{% for iets in categorieTree %}
+					<li class="maincategory_item">
+						<a {% if iets.id == mainCategorieId %} class="active" {% endif %} href="{{ basePath() }}/category?categorieId={{iets.id}}" class="category_link">{{ iets.naam }}</a>
+						{% if iets.subcategories is not empty %}
+							<ul class="subcategory_list">
+								{% for nogiets in iets.subcategories %}
+									<li class="subcategory_item">
+										<span class="subcategory_toggle">
+											<a {% if nogiets.id == mainCategorieId %} class="active" {% endif %} href="{{ basePath() }}/category?categorieId={{nogiets.id}}">{{ nogiets.naam }}</a>
+										</span>
+										<ul class="subsubcategory_list">
+											{% for nognogiets in nogiets.subcategories %}
+												<li class="subsubcategory_item">
+													<a {% if nognogiets.id == mainCategorieId %} class="active" {% endif %} href="{{ basePath() }}/category?categorieId={{nognogiets.id}}">{{ nognogiets.naam }}</a>
+												</li>
+											{% endfor %}
+										</ul>
+									</li>
+								{% endfor %}
+							</ul>
+						{% endif %}
+					</li>
+				{% endfor %}
+			</ul>
+
+		</aside>
+
+		<!-- titel div 
+		<div>
+			{% if mainCategorieId is null %}
+				<h1> Hoofd categorieën</h1>
+				{% endif %}
+		</div>
+		-->
+		<div class="maincategory_div">
+			<section class="product-cards-grid">
+
+				<!-- category cards -->
+				{% if mainCategorieId is null %}
+
+					{% for wat in categories %}
+						{% include "/Components/categoryCard.twig" with {"categorie" : wat} %}
+					{% endfor %}
+				{% else %}
+					{% for nogwat in getSubByHeadId %}
+						{% include "/Components/categoryCard.twig" with {"categorie" : nogwat} %}
+					{% endfor %}
+				{% endif %}
+
+				<!-- productcards -->
+				{% for product in getProducts %}
+					{% include "/Components/productCard.twig" with {"product" : product} %}
+				{% endfor %}
+			</section>
+
+			
+		</div>
+
+	</div>
+
+
+{% endblock %}

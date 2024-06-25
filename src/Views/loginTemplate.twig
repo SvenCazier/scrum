@@ -1,0 +1,328 @@
+{% extends "baseTemplate.twig" %}
+{% block content %}
+	<section class="container-forms registration-login">
+		<section class="form-small-center">
+			<h2>Aanmelden</h2>
+			<small class="login-info">
+				Ben je al bekend bij ons? Log dan in met uw bestaand account.
+			</small>
+			<br>
+			<hr>
+			<br>
+			<br>
+			<form action="{{ basePath() }}/login{% if referer %}?ref={{ referer }}{% endif %}" method="post">
+				<article class="form-control">
+					<label for="login_email">E-mail:</label>
+					<input type="email" id="login_email" name="login_email" required>
+					{% if errors.login_email %}
+						<p class="error">{{ errors.login_email }}</p>
+					{% endif %}
+				</article>
+				<article class="form-control">
+					<label for="login_password">Wachtwoord:</label>
+					<input type="password" id="login_password" name="login_password" required>
+					{% if errors.login_password %}
+						<p class="error">{{ errors.login_password }}</p>
+					{% endif %}
+				</article>
+				<article class="form-control center-btn">
+					<button type="submit">Aanmelden</button>
+				</article>
+				{% if errors.otherLoginError %}
+					<article>
+						<p class="error">
+							<i class="bi bi-exclamation-triangle"></i>
+							{{ errors.otherLoginError }}</p>
+					</article>
+				{% endif %}
+			</form>
+		</section>
+
+
+		<section class="form-small-center">
+			<h2>Registreren</h2>
+			<small class="login-info">
+				Kies om een nieuwe account aan te maken, of simpelweg als gast verder te gaan, zonder dat hier een wachtwoord voor nodig is.
+			</small>
+			<hr>
+			<br>
+			<br>
+			<form action="{{ basePath() }}/register{% if referer %}?ref={{ referer }}{% endif %}" method="POST">
+				<fieldset>
+					<article class="form-control">
+						<label for="person_type">Type klant:</label>
+
+						<select id="person_type" name="person_type" required>
+							<option value="natural_person" {% if registrationData.person_type == "natural_person" %} selected {% endif %}>Natuurlijk persoon</option>
+							<option value="legal_person" {% if registrationData.person_type == "legal_person" %} selected {% endif %}>Rechtspersoon</option>
+						</select>
+					</article>
+				</fieldset>
+
+				<fieldset id="company_fields">
+					<legend>Bedrijfsinformatie</legend>
+					<article class="form-control">
+						<label for="company_name">Bedrijfsnaam:</label>
+						<input type="text" id="company_name" name="company_name" value="{{ registrationData.company_name }}">
+						{% if errors.company_name %}
+							<p class="error">{{ errors.company_name }}</p>
+						{% endif %}
+					</article>
+					<article class="form-control">
+						<label for="vat_number">BTW-Nummer:
+						</label>
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<div class="input-group-text">BE-</div>
+							</div>
+							<input type="text" id="vat_number" name="vat_number" value="{{ registrationData.vat_number }}">
+						</div>
+						{% if errors.vat_number %}
+							<p class="error">{{ errors.vat_number }}</p>
+						{% endif %}
+					</article>
+					<article class="form-control">
+						<label for="company_role">Functie:</label>
+						<input type="text" id="company_role" name="company_role" value="{{ registrationData.company_role }}">
+						{% if errors.company_role %}
+							<p class="error">{{ errors.company_role }}</p>
+						{% endif %}
+					</article>
+				</fieldset>
+
+				<fieldset>
+					<legend>Personalia</legend>
+					<article class="form-control">
+						<label for="first_name">Voornaam:</label>
+						<input type="text" id="first_name" name="first_name" value="{{ registrationData.first_name }}" required>
+						{% if errors.first_name %}
+							<p class="error">{{ errors.first_name }}</p>
+						{% endif %}
+					</article>
+					<article class="form-control">
+						<label for="last_name">Familienaam:</label>
+						<input type="text" id="last_name" name="last_name" value="{{ registrationData.last_name }}" required>
+						{% if errors.last_name %}
+							<p class="error">{{ errors.last_name }}</p>
+						{% endif %}
+					</article>
+				</fieldset>
+
+				<fieldset>
+					<legend>Facturatieadres</legend>
+					<article class="form-control">
+						<label for="invoice_street">Straat:</label>
+						<input type="text" id="invoice_street" name="invoice_street" value="{{ registrationData.invoice_street }}" required>
+						{% if errors.invoice_street %}
+							<p class="error">{{ errors.invoice_street }}</p>
+						{% endif %}
+					</article>
+					<article class="form-control">
+						<label for="invoice_house_number">Huisnummer:</label>
+						<input type="text" id="invoice_house_number" name="invoice_house_number" value="{{ registrationData.invoice_house_number }}" required>
+						{% if errors.invoice_house_number %}
+							<p class="error">{{ errors.invoice_house_number }}</p>
+						{% endif %}
+					</article>
+					<article class="form-control">
+						<label for="invoice_appendix">Bus:</label>
+						<input type="text" id="invoice_appendix" name="invoice_appendix" value="{{ registrationData.invoice_appendix }}">
+						{% if errors.invoice_appendix %}
+							<p class="error">{{ errors.invoice_appendix }}</p>
+						{% endif %}
+					</article>
+					<article class="form-control">
+						<label for="invoice_zip_code">Postcode:</label>
+						<input type="text" id="invoice_zip_code" name="invoice_zip_code" value="{{ registrationData.invoice_zip_code }}" required>
+						{% if errors.invoice_zip_code %}
+							<p class="error">{{ errors.invoice_zip_code }}</p>
+						{% endif %}
+					</article>
+					<article class="form-control">
+						<label for="invoice_location">Woonplaats:</label>
+						<input type="text" id="invoice_location" name="invoice_location" value="{{ registrationData.invoice_location }}" required>
+						{% if errors.invoice_location %}
+							<p class="error">{{ errors.invoice_location }}</p>
+						{% endif %}
+					</article>
+				</fieldset>
+
+				<fieldset>
+					<legend>Leveringsadres</legend>
+					<article class="form-control">
+						<label for="delivery_same_as_invoice">Zelfde als facturatieadres:</label>
+						<input type="checkbox" id="delivery_same_as_invoice" name="delivery_same_as_invoice">
+					</article>
+					<article class="form-control">
+						<label for="delivery_street">Straat:</label>
+						<input type="text" id="delivery_street" name="delivery_street" value="{{ registrationData.delivery_street }}" required>
+						{% if errors.delivery_street %}
+							<p class="error">{{ errors.delivery_street }}</p>
+						{% endif %}
+					</article>
+					<article class="form-control">
+						<label for="delivery_house_number">Huisnummer:</label>
+						<input type="text" id="delivery_house_number" name="delivery_house_number" value="{{ registrationData.delivery_house_number }}" required>
+						{% if errors.delivery_house_number %}
+							<p class="error">{{ errors.delivery_house_number }}</p>
+						{% endif %}
+					</article>
+					<article class="form-control">
+						<label for="delivery_appendix">Bus:</label>
+						<input type="text" id="delivery_appendix" name="delivery_appendix" value="{{ registrationData.delivery_appendix }}">
+						{% if errors.delivery_appendix %}
+							<p class="error">{{ errors.delivery_appendix }}</p>
+						{% endif %}
+					</article>
+					<article class="form-control">
+						<label for="delivery_zip_code">Postcode:</label>
+						<input type="text" id="delivery_zip_code" name="delivery_zip_code" value="{{ registrationData.delivery_zip_code }}" required>
+						{% if errors.delivery_zip_code %}
+							<p class="error">{{ errors.delivery_zip_code }}</p>
+						{% endif %}
+					</article>
+					<article class="form-control">
+						<label for="delivery_location">Woonplaats:</label>
+						<input type="text" id="delivery_location" name="delivery_location" value="{{ registrationData.delivery_location }}" required>
+						{% if errors.delivery_location %}
+							<p class="error">{{ errors.delivery_location }}</p>
+						{% endif %}
+					</article>
+				</fieldset>
+
+				<fieldset>
+					<legend>Account details</legend>
+					<article class="form-control">
+						<label for="register_email">E-mailadres:</label>
+						<input type="email" id="register_email" name="register_email" value="{{ registrationData.register_email }}" required>
+						{% if errors.register_email %}
+							<p class="error">{{ errors.register_email }}</p>
+						{% endif %}
+					</article>
+					<article class="form-control">
+						<label for="create_account">Wilt u een account aanmaken?</label>
+						<input type="checkbox" id="create_account" name="create_account">
+					</article>
+
+					<article class="form-control">
+						<label for="register_password">Wachtwoord:</label>
+						<input type="password" id="register_password" name="register_password" value="{{ registrationData.register_password }}">
+						{% if errors.register_password %}
+							<p class="error">{{ errors.register_password }}</p>
+						{% endif %}
+					</article>
+					<article class="form-control">
+						<label for="confirmation_password">Bevestig wachtwoord:</label>
+						<input type="password" id="confirmation_password" name="confirmation_password" value="{{ registrationData.confirmation_password }}">
+						{% if errors.confirmation_password %}
+							<p class="error">{{ errors.confirmation_password }}</p>
+						{% endif %}
+					</article>
+					{% if errors.passwords_not_equal %}
+						<article>
+							<p class="error">
+								<i class="bi bi-exclamation-triangle"></i>
+								{{ errors.errors.passwords_not_equal }}</p>
+						</article>
+					{% endif %}
+
+				</fieldset>
+				<article class="form-control center-btn">
+					<button id="register_button" type="submit">Registeren</button>
+				</article>
+				{% if errors.otherRegistrationError %}
+					<article>
+						<p class="error">
+							<i class="bi bi-exclamation-triangle"></i>
+							{{ errors.otherRegistrationError }}</p>
+					</article>
+				{% endif %}
+			</form>
+		</section>
+	</section>
+
+
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+const personTypeSelect = document.getElementById("person_type");
+const companyFields = document.getElementById("company_fields");
+
+const invoiceStreet = document.getElementById("invoice_street");
+const invoiceHouseNumber = document.getElementById("invoice_house_number");
+const invoiceAppendix = document.getElementById("invoice_appendix");
+const invoiceZipCode = document.getElementById("invoice_zip_code");
+const invoiceLocation = document.getElementById("invoice_location");
+
+const deliveryStreet = document.getElementById("delivery_street");
+const deliveryHouseNumber = document.getElementById("delivery_house_number");
+const deliveryAppendix = document.getElementById("delivery_appendix");
+const deliveryZipCode = document.getElementById("delivery_zip_code");
+const deliveryLocation = document.getElementById("delivery_location");
+
+const deliverySameAsInvoice = document.getElementById("delivery_same_as_invoice");
+
+const registerPassword = document.getElementById("register_password");
+const confirmationPassword = document.getElementById("confirmation_password");
+const registerButton = document.getElementById("register_button");
+const createAccount = document.getElementById("create_account");
+
+toggleCompanyFields(personTypeSelect.value === "legal_person");
+showPasswordFields(false);
+
+
+function toggleCompanyFields(show) {
+companyFields.style.display = show ? "block" : "none";
+const inputs = companyFields.querySelectorAll("input");
+inputs.forEach(function (input) {
+input.required = show;
+if (! show) {
+input.value = "";
+}
+});
+}
+
+personTypeSelect.addEventListener("change", function () {
+toggleCompanyFields(this.value === "legal_person");
+});
+
+
+deliverySameAsInvoice.addEventListener("change", function () {
+if (this.checked) {
+deliveryStreet.value = invoiceStreet.value;
+deliveryHouseNumber.value = invoiceHouseNumber.value;
+deliveryAppendix.value = invoiceAppendix.value;
+deliveryZipCode.value = invoiceZipCode.value;
+deliveryLocation.value = invoiceLocation.value;
+} else {
+deliveryStreet.value = "";
+deliveryHouseNumber.value = "";
+deliveryAppendix.value = "";
+deliveryZipCode.value = "";
+deliveryLocation.value = "";
+}
+});
+
+function showPasswordFields(show) {
+registerPassword.required = show;
+confirmationPassword.required = show;
+registerPassword.parentElement.style.display = show ? "flex" : "none";
+confirmationPassword.parentElement.style.display = show ? "flex" : "none";
+
+if (show) {
+registerButton.innerText = "Account aanmaken";
+} else {
+registerPassword.value = "";
+confirmationPassword.value = "";
+registerButton.innerText = "Doorgaan als gast";
+}
+}
+
+createAccount.addEventListener("change", function () {
+showPasswordFields(this.checked);
+});
+
+
+});
+	</script>
+
+{% endblock %}

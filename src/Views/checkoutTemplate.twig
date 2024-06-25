@@ -1,0 +1,163 @@
+{% extends "baseTemplate.twig" %}
+{% block content %}
+	{# if authenticatedUser exists then set user to authenticatedUser, else set to guestUser #}
+	{% set user = authenticatedUser is not null ? authenticatedUser : guestUser %}
+	
+	<div class="maincategory_container">
+		<div class="maincategory_div">
+			<section class="contain-floats">
+				<article class="section-30 shadow">
+					<h2>Klantgegevens</h2>
+					<p>{{ user.voornaam }}
+						{{ user.familienaam }}</p>
+					<p>{{ user.emailAdres }}</p>
+					{% if user.bedrijfsNaam %}
+						<p>{{ user.bedrijfsNaam }}</p>
+					{% endif %}
+					{% if user.btwNummer %}
+						<p>BE-{{ user.btwNummer }}</p>
+					{% endif %}
+					{% if user.functie %}
+						<p>{{ user.functie }}</p>
+					{% endif %}
+				</article>
+				<article class="section-30 shadow">
+					<h2>Facturatieadres</h2>
+					<p>{{ user.facturatieadres.straat }}
+						{{ user.facturatieadres.huisNummer }}
+						{% if user.facturatieadres.bus %}/{{ user.facturatieadres.bus }}
+						{% endif %}
+					</p>
+					<p>{{ user.facturatieadres.plaats.postcode }}
+						{{ user.facturatieadres.plaats.plaats }}</p>
+				</article>
+				<article class="section-30 shadow">
+					<h2>Leveringsadres</h2>
+					<p>{{ user.leveringsAdres.straat }}
+						{{ user.leveringsAdres.huisNummer }}
+						{% if user.leveringsAdres.bus %}
+							/{{ user.leveringsAdres.bus }}
+						{% endif %}
+					</p>
+					<p>{{ user.leveringsAdres.plaats.postcode }}
+						{{ user.leveringsAdres.plaats.plaats }}</p>
+				</article>
+			</section>
+			<section class="checkout-overzicht">
+				<ul class="winkelmand-h2">
+					<li class="winkelmand-h2-left">
+						<h2>Mijn winkelmand</h2>
+					</li>
+					<li class="winkelmand-h2-right">
+						<button id="clearCartBtn">
+							<i class="bi bi-trash"></i>
+						</button>
+					</li>
+				</ul>
+				<div class="checkout-overzicht-display">
+					<article class="bestelling-verandering section-50">
+						<table class="fill">
+							<thead>
+								<tr>
+									<th class="table-container-product">ARTIKEL</th>
+									<th class="table-center">AANTAL</th>
+									<th class="table-center">TOTAAL</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="align-left">
+										naam
+									</td>
+									<td>
+										aantal
+									</td>
+									<td>
+										prijs
+									</td>
+									<td class="right">
+										<b>
+											verwijder
+										</b>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</article>
+
+					<article class="bestelling-overzicht section-30">
+						<table class="fill">
+							<thead>
+								<tr>
+									<th colspan="2">OVERZICHT</th>
+								</tr>
+							</thead>
+							<tbody id="orderSummaryBody">
+								<tr>
+									<td>
+										<b>
+											Subtotaal
+										</b>
+									</td>
+
+									<td id="subtotalCell">
+										€
+									</td>
+								</tr>
+								<tr>
+									<td class="line">
+										<b>Korting</b>
+									</td>
+									<td class="line" id="discountCell">
+										<b>€</b>
+									</td>
+								</tr>
+								<tr>
+									<td class="padding-top">
+										<b>Totaal</b>
+									</td>
+									<td class="padding-top" id="totalPriceCell">
+										<b>€</b>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+
+
+						<form class="form">
+							<table class="fill">
+								<thead>
+									<tr>
+										<th colspan="2">
+											<label for="paymentMethod">Betaalmethode</label>
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td colspan="2">
+											<article class="form-control">
+												<select id="paymentMethod" name="paymentMethod">
+													{% for paymentMethod in paymentMethods %}
+														<option value="{{ paymentMethod.id}}">{{ paymentMethod.	naam }}</option>
+													{% endfor %}
+												</select>
+											</article>
+										</td>
+
+									</tr>
+									<tr>
+										<td class="padding-top">
+											<button id="orderBtn" class="right-btn" type="submit">Bestel</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</form>
+					</article>
+				</div>
+			</section>
+		</div>
+	</div>
+{% endblock %}

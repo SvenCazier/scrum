@@ -1,0 +1,24 @@
+<div class="product-card">
+	<a href="{{ basePath() }}/product/{{product.id}}">
+		<div class="container-product-img">
+			<img class="product-img" src="./public/assets/img/artikel-{{product.id}}.jpg" alt="product {{product.naam}}"/>
+		</div>
+		<article class="product-article">
+			<h2 class="product-h2">{{product.naam}}</h2>
+			<p class="product-omschrijving">{{product.omschrijving}}</p>
+			<div class="product-group">
+				<ul>
+					<li class="product-prijs">
+						&euro;
+						{{product.prijs}}
+					</li>
+					<li class="product-winkelmandje">
+						<button data-product-id="{{product.id}}" data-product-quantity="1" id="addCardProductToCart{{product.id}}" class="addCardProductToCart product-winkelmandje-btn">+
+							<i class="bi bi-cart"></i>
+						</button>
+					</li>
+				</ul>
+			</div>
+		</article>
+	</a>
+</div>
